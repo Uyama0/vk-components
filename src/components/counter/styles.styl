@@ -1,0 +1,47 @@
+.counter
+    position: relative
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    border-radius: 999px
+    white-space: nowrap
+
+    &_primary
+        background-color: hsla(151, 59%, 45%, 1)
+        color: white
+        
+        .pulse
+            background-color: hsla(151, 59%, 45%, 1)
+
+    &_secondary
+        background-color: hsla(20, 11.70%, 69.80%, 0.5)
+        color: hsla(228, 5%, 19%, 1)
+
+        .pulse
+            background-color: hsla(20, 11.70%, 69.80%, 0.5)
+
+    .pulse
+        position: absolute
+        height: 100% 
+        width: 100% 
+        border-radius: 999px
+        animation-name: dot-scale-fade
+        animation-iteration-count: infinite
+        animation-duration: 2s
+
+        &.one
+          animation-delay: 0s
+
+        &.two
+          animation-delay: 0.25s
+    
+@keyframes dot-scale-fade
+  0%
+    opacity: 0.2
+    transform: scale(1)
+  50%
+    opacity: 0
+    transform: scale(3)
+  100%
+    opacity: 0
+    transform: scale(3)
