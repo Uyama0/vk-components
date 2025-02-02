@@ -1,3 +1,5 @@
+import { COUNTER_SIZE_MAP } from '@/constants/sizes';
+
 import './styles.styl';
 
 export type CounterProps = {
@@ -6,6 +8,7 @@ export type CounterProps = {
   stroke?: boolean;
   quantity?: string;
   pulse?: boolean;
+  sx?: React.CSSProperties;
 };
 
 export const Counter: React.FC<CounterProps> = ({
@@ -14,8 +17,10 @@ export const Counter: React.FC<CounterProps> = ({
   stroke = true,
   quantity,
   pulse = false,
+  sx,
 }) => {
-  const borderWidth = Math.floor(size / 8);
+  const { width, height, borderWidth } = COUNTER_SIZE_MAP[size];
+
   const HorizontalPadding = size > 12 ? size / 4 : 0;
 
   const formatQuantity = (quantity: string): string => {
@@ -32,20 +37,14 @@ export const Counter: React.FC<CounterProps> = ({
   };
 
   const styles = {
-    minWidth: `${size}px`,
-    height: `${size}px`,
-    border: stroke
-      ? `${borderWidth}px solid ${
-          variant === 'primary'
-            ? 'hsla(151, 59%, 45%, 1)'
-            : 'hsla(20, 11.70%, 69.80%, 0.12)'
-        }`
-      : 'none',
+    width: `${size > 12 && quantity && quantity.length >= 2 ? `auto` : width}`,
+    height,
+    borderWidth: stroke ? `${borderWidth}px` : '0px',
     padding: `0 ${HorizontalPadding}px`,
   };
 
   return (
-    <div style={styles} className={`counter counter_${variant}`}>
+    <div style={{ ...styles, ...sx }} className={`counter counter_${variant}`}>
       {size > 12 && quantity && formatQuantity(quantity)}
       {pulse && size <= 12 && (
         <>
