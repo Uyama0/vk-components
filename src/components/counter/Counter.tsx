@@ -35,8 +35,6 @@ export const Counter: React.FC<CounterProps> = ({
     return quantity.length > 3 ? quantity.slice(0, 3) : quantity;
   };
 
-  console.log(stroke);
-
   const styles = {
     width: `${size > 12 && quantity && quantity.length >= 2 ? `auto` : width}`,
     height,
@@ -51,8 +49,8 @@ export const Counter: React.FC<CounterProps> = ({
       aria-label="Счетчик"
       aria-live="polite"
       role="status"
+      style={{ ...styles, ...props.style }}
       {...props}
-      style={{ ...styles }}
     >
       {size > 12 && quantity && formatQuantity(quantity)}
       {pulse && size <= 12 && (

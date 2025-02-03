@@ -42,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
       aria-label="Кнопка"
       data-testid="button"
       {...props}
-      style={{ padding, borderRadius }}
+      style={{ padding, borderRadius, ...props.style }}
     >
       <div className="contentGroup" style={{ gap }}>
         {isLoading && (
