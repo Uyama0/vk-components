@@ -26,7 +26,7 @@ export default {
     label: {
       control: 'text',
     },
-    sx: {
+    style: {
       control: 'object',
     },
   },

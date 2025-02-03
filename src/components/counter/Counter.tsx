@@ -8,8 +8,7 @@ export type CounterProps = {
   stroke?: boolean;
   quantity?: string;
   pulse?: boolean;
-  sx?: React.CSSProperties;
-};
+} & React.ComponentPropsWithoutRef<'div'>;
 
 export const Counter: React.FC<CounterProps> = ({
   variant = 'primary',
@@ -17,7 +16,7 @@ export const Counter: React.FC<CounterProps> = ({
   stroke = true,
   quantity,
   pulse = false,
-  sx,
+  ...props
 }) => {
   const { width, height, borderWidth } = COUNTER_SIZE_MAP[size];
 
@@ -36,6 +35,8 @@ export const Counter: React.FC<CounterProps> = ({
     return quantity.length > 3 ? quantity.slice(0, 3) : quantity;
   };
 
+  console.log(stroke);
+
   const styles = {
     width: `${size > 12 && quantity && quantity.length >= 2 ? `auto` : width}`,
     height,
@@ -44,7 +45,15 @@ export const Counter: React.FC<CounterProps> = ({
   };
 
   return (
-    <div style={{ ...styles, ...sx }} className={`counter counter_${variant}`}>
+    <div
+      className={`counter counter_${variant}`}
+      data-testid="counter"
+      aria-label="Счетчик"
+      aria-live="polite"
+      role="status"
+      {...props}
+      style={{ ...styles }}
+    >
       {size > 12 && quantity && formatQuantity(quantity)}
       {pulse && size <= 12 && (
         <>

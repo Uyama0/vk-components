@@ -22,7 +22,7 @@ export default {
     quantity: {
       control: 'text',
     },
-    sx: {
+    style: {
       control: 'object',
     },
   },
@@ -38,5 +38,4 @@ Default.args = {
   size: 8,
   stroke: true,
   pulse: false,
-  sx: {},
 };

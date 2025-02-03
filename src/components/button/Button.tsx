@@ -13,8 +13,7 @@ export type ButtonProps = {
   counter?: boolean;
   focused?: boolean;
   label: string;
-  sx?: React.CSSProperties;
-};
+} & React.ComponentPropsWithoutRef<'button'>;
 
 export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
@@ -23,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   counter,
   focused = false,
   label,
-  sx,
+  ...props
 }) => {
   const { padding, gap, loaderSize, borderRadius } = BUTTON_SIZE_MAP[size];
 
@@ -36,13 +35,20 @@ export const Button: React.FC<ButtonProps> = ({
       className={`button button_${variant} ${isLoading ? 'loading' : ''} ${
         focused && isEnabled ? 'focused' : ''
       }`}
-      style={{ padding, borderRadius, ...sx }}
       disabled={isDisabled}
+      aria-busy={isLoading}
+      aria-disabled={isDisabled}
+      aria-live={isLoading ? 'assertive' : 'off'}
+      aria-label="Кнопка"
+      data-testid="button"
+      {...props}
+      style={{ padding, borderRadius }}
     >
       <div className="contentGroup" style={{ gap }}>
         {isLoading && (
           <div
             className="spinner"
+            aria-hidden="true"
             style={{ width: loaderSize, height: loaderSize }}
           />
         )}
@@ -52,7 +58,7 @@ export const Button: React.FC<ButtonProps> = ({
             quantity="1" // some value props mb
             stroke={false}
             size={16}
-            sx={{
+            style={{
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
               backdropFilter: 'blur(10px)',
             }}
