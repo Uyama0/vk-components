@@ -32,7 +32,18 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<ButtonProps> = (args: any) => <Button {...args} />;
+const Template: StoryFn<ButtonProps> = (args) => (
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+    }}
+  >
+    <Button {...args} />
+  </div>
+);
 
 export const Default = Template.bind({});
 
@@ -42,4 +53,22 @@ Default.args = {
   state: 'enabled',
   focused: false,
   label: 'Cute button',
+};
+
+export const LoadingState = Template.bind({});
+LoadingState.args = {
+  variant: 'primary',
+  size: 36,
+  state: 'loading',
+  focused: false,
+  label: 'Loading...',
+};
+
+export const DisabledState = Template.bind({});
+DisabledState.args = {
+  variant: 'primary',
+  size: 36,
+  state: 'disabled',
+  focused: false,
+  label: 'Disabled button',
 };
